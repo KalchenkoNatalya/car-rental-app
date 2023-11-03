@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
 import { fromFilter } from 'redux/carsAdvertsSlice';
-// import { fromFilter } from '../../redux/carsAdvertsSlice';
 
 const carMakes = [
   'Buick',
@@ -28,17 +27,18 @@ const carMakes = [
   'Land',
   'Tesla',
 ];
-export const Filter = ({ selectedMake }) => {
+export const Filter = ({ selectedFilter }) => {
   const dispatch = useDispatch();
   const handleSelectedFilter = event => {
     dispatch(fromFilter(event.target.value));
+    console.log("в фільтрі обрали:", selectedFilter);
   };
   return (
     <div>
       <label htmlFor="carMakeDropdown">Select Car Make: </label>
       <select
         id="carMakeDropdown"
-        value={selectedMake}
+        value={selectedFilter}
         className={css.filterSelect}
         onChange={handleSelectedFilter}
       >
@@ -51,7 +51,7 @@ export const Filter = ({ selectedMake }) => {
       </select>
     </div>
     // <select
-    //   value={selectedMake}
+    //   value={selectedFilter}
     //   className={css.filterSelect}
     //   onChange={selectedFilter}
     // >
@@ -63,5 +63,5 @@ export const Filter = ({ selectedMake }) => {
 };
 
 Filter.propTypes = {
-  selectedMake: PropTypes.string,
+  selectedFilter: PropTypes.string,
 };

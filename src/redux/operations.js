@@ -9,9 +9,9 @@ export const fetchCarsAdvertsThunk = createAsyncThunk (
     "Advert/fetchAll", async(_, thunkAPI) => {
         try {
             const state = thunkAPI.getState();
-            console.log(state);
+            // console.log("state", state);
             const page = state.carsAdvertsState.page;
-            console.log(page);
+            // console.log("page:", page);
             const respons =  await axios.get(`${baseURL}/Advert?page=${page}&limit=${limit}`)
             return respons.data
         } catch (error) {
