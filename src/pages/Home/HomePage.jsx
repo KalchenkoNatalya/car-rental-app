@@ -16,7 +16,7 @@ const HomePage = () => {
               alt="Rental car"
             />
 
-            <p className={css.price}>at $40/day</p>
+            <p className={css.price}>at $25/day</p>
           </div>
         </div>
 

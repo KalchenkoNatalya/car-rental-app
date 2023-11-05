@@ -77,7 +77,6 @@ export const CardOneCar = ({ oneCar }) => {
       const updateStorage = [...parseFavoritesFromStorage, oneCar];
       localStorage.setItem('favorites', JSON.stringify(updateStorage));
     }
-    console.log('click on heart');
   };
   return (
     <div className={css.carCard}>
@@ -137,8 +136,6 @@ export const CardOneCar = ({ oneCar }) => {
     </div>
   );
 };
-
-
 
 CardOneCar.propTypes = {
   oneCar: PropTypes.shape({

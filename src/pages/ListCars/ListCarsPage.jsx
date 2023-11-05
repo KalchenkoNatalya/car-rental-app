@@ -45,7 +45,6 @@ export const ListCarsPage = () => {
 
   const loadMore = () => {
     dispatch(pagePaginations());
-    console.log('натиснули лоад мор');
   };
 
   return (

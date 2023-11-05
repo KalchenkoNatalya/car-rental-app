@@ -36,8 +36,6 @@ export const Filter = () => {
   };
   const handleSearchClick = () => {
     dispatch(fromFilter(selectedValue));
-
-    console.log('в фільтрі обрали:', selectedValue);
   };
   return (
     <div className={css.filterWrap}>
