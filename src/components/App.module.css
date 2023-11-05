@@ -1,10 +1,27 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 header {
   padding-top: 20px;
   padding-bottom: 20px;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
   background-color: #f7f7fb;
 }
-
+main {
+  flex: 1;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+  background-color: #f7f7fb;
+}
 section {
   padding: 20px;
 }
@@ -13,6 +30,7 @@ section {
   display: flex;
   gap: 20px;
   padding-left: 20px;
+  justify-content: center;
 }
 
 .nav_item {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import css from './Modal.module.css';
-
+import PropTypes from 'prop-types';
 export const Modal = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     const handleCloseOnEsc = e => {
@@ -21,16 +21,19 @@ export const Modal = ({ isOpen, onClose, children }) => {
 
   return ReactDOM.createPortal(
     <div
-      className={isOpen ? `${css.modal} ${css.active}` : css.modal}
+      className={isOpen ? `${css.backdrop} ${css.active}` : css.backdrop}
       onClick={onClose}
     >
-      <div className={css.modalContent} onClick={e => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>
-          ✕
-        </button>
-        {children}
+      <div className={css.modal} onClick={e => e.stopPropagation()}>
+     
+        {children }
       </div>
     </div>,
     document.body
   );
+};
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired, 
+  onClose: PropTypes.func.isRequired, 
+  children: PropTypes.node, 
 };

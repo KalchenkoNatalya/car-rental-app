@@ -34,6 +34,9 @@ const carsAdvertsSlise = createSlice({
     updateFavoritesFromStorage: (state, action) => {
       state.favorites = action.payload;
     },
+    updatePageToFirst: state => {
+      state.page = 1;
+    },
   },
   extraReducers: builder =>
     builder
@@ -71,5 +74,6 @@ export const {
   addToFavorites,
   removeFromFavorites,
   updateFavoritesFromStorage,
+  updatePageToFirst,
 } = carsAdvertsSlise.actions;
 export const carsAdvertsReduser = carsAdvertsSlise.reducer;

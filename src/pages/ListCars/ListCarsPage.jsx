@@ -16,7 +16,6 @@ import {
   selectError,
   selectFilteredCarsAdverts,
   selectIsLoading,
-  // selectVisibleCarsAdverts,
 } from 'redux/selectors';
 import css from './ListCarsPage.module.css';
 
@@ -25,7 +24,6 @@ export const ListCarsPage = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const filter = useSelector(selectFilteredCarsAdverts);
-  // const filteredCarsAdverts = useSelector(selectVisibleCarsAdverts);
   const dispatch = useDispatch();
   const page = useSelector(state => state.carsAdvertsState.page);
 
@@ -49,6 +47,7 @@ export const ListCarsPage = () => {
     dispatch(pagePaginations());
     console.log('натиснули лоад мор');
   };
+
   return (
     <section className={css.section}>
       {isLoading && <Loader />}
@@ -57,6 +56,7 @@ export const ListCarsPage = () => {
       <Filter />
 
       <CarsList cars={dataAllCars} />
+
       {dataAllCars.length === 12 && (
         <button onClick={loadMore} className={css.button}>
           Load More

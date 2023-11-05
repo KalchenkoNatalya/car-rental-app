@@ -1,4 +1,119 @@
+.cardDetailsWrap {
+  position: relative;
+}
+.closeButton {
+  position: absolute;
+  top: -25px;
+  right: -14px;
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
 .imgDetails {
   width: 469px;
   height: 314px;
+  border-radius: 15px;
+}
+.titleWrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  margin-bottom: 8px;
+}
+.titleCard {
+  margin-top: 15px;
+  color: #121417;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3333;
+}
+
+.model {
+  color: var(--blue-color);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3333;
+}
+
+.description {
+  display: flex;
+
+  color: rgba(18, 20, 23, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.description p + p::before {
+  content: ' | ';
+  margin: 0 5px;
+}
+
+.detailedDescription {
+  margin-top: 14px;
+  color: #121417;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857;
+}
+
+.titleAccessoriesFunctionalities {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: #121417;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.42857;
+}
+.itemConditionWrap {
+  display: flex;
+  gap: 8px;
+}
+
+.itemCondition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 7px 14px;
+
+  border-radius: 35px;
+  background: #f9f9f9;
+  color: #363535;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.24px;
+}
+.itemConditionSpan {
+  color: var(--blue-color);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.24px;
+}
+.rentalButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  padding: 12px 50px;
+
+  border-radius: 12px;
+  background-color: var(--blue-color);
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.42857;
+}
+.rentalButton:hover,
+.rentalButton:focus {
+  background-color: var(--blue-hover-color);
 }

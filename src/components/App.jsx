@@ -6,9 +6,7 @@ import css from './App.module.css';
 
 export const App = () => {
   return (
-    <div
-    // className={css.wrap}
-    >
+    <div className={css.app}>
       <header>
         <nav>
           <ul className={css.nav_list}>
@@ -38,6 +36,18 @@ export const App = () => {
           <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
+      <footer className={css.footer}>
+        <h2>Contact Us</h2>
+        <p>
+          If you have any questions or need assistance, please contact us at:
+        </p>
+        <p>
+          Email: <a href="mailto:info@carrental.com">info@carrental.com</a>
+        </p>
+        <p>
+          Phone: <a href="tel:+380730000000">+380730000000</a>
+        </p>
+      </footer>
     </div>
   );
 };

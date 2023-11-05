@@ -29,3 +29,8 @@ li {
   margin: 0;
   padding: 0;
 }
+:root {
+  --white-color: white;
+  --blue-color: #3470ff;
+  --blue-hover-color: #0b44cd;
+}

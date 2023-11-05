@@ -22,3 +22,7 @@
   border: none;
   display: block;
 }
+.button:hover,
+.button:focus {
+  color: #0b44cd;
+}

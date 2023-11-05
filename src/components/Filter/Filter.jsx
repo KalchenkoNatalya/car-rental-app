@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
 import { fromFilter } from 'redux/carsAdvertsSlice';
@@ -64,18 +63,5 @@ export const Filter = () => {
         Search
       </button>
     </div>
-    // <select
-    //   value={selectedFilter}
-    //   className={css.filterSelect}
-    //   onChange={selectedFilter}
-    // >
-    //   <option value="">All Makes</option>
-    //   <option value="Toyota">Toyota</option>
-    //   <option value="Honda">Honda</option>
-    // </select>
   );
-};
-
-Filter.propTypes = {
-  selectedFilter: PropTypes.string,
 };

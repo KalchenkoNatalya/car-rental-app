@@ -9,9 +9,9 @@ export const fetchCarsAdvertsThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      // console.log("state", state);
+
       const page = state.carsAdvertsState.page;
-      // console.log("page:", page);
+
       const respons = await axios.get(
         `${baseURL}/Advert?page=${page}&limit=${limit}`
       );
@@ -27,12 +27,11 @@ export const fetchFilterCarsAdvertsThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      // console.log("state", state);
+
       const filter = state.carsAdvertsState.filter;
-      // const filter = useSelector(selectFilteredCarsAdverts)
-      // console.log("page:", page);
+
       const respons = await axios.get(`${baseURL}/Advert?search=${filter}`);
-      // const respons =  await axios.get(`${baseURL}/Advert?page=${page}&search=${filter}`)
+
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './CardDetails.module.css';
-
-export const CardDetails = ({ oneCar }) => {
+import PropTypes from 'prop-types';
+export const CardDetails = ({ oneCar, onClose }) => {
   const {
     id,
     img,
@@ -34,40 +34,123 @@ export const CardDetails = ({ oneCar }) => {
   const rentalPriceFormat = rentalPrice.replace('$', '') + '$';
 
   return (
-    <div className="car-card">
+    <div className={css.cardDetailsWrap}>
+      <button className={css.closeButton} onClick={onClose}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M18 6L6 18"
+            stroke="#121417"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M6 6L18 18"
+            stroke="#121417"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
       <img src={img} alt={` car ${make} ${model}`} className={css.imgDetails} />
-      <h2>{`${make} ${model}, ${year}`}</h2>
-      <p>${rentalPrice}</p>
-      <p> {city}</p>
-      <p>| {country} </p>
-      <p>| id: {id}</p>
-      <p>| Year: {year}</p>
-      <p>| Type: {type}</p>
-      <p> FuelConsumption: {fuelConsumption}</p>
-      <p>| EngineSize: {engineSize}</p>
-      <p> {description}</p>
-      <p> Accessories and functionalities: </p>
+      <div className={css.titleWrap}>
+        <h2 className={css.titleCard}>
+          {`${make} `}
+          {(make === 'Volvo' || make === 'Buick') && (
+            <span className={css.model}>{model}</span>
+          )}
+          {`, ${year}`}
+        </h2>
+        <p className={css.titleCard}>{rentalPrice}</p>
+      </div>
+      <div className={css.description}>
+        <p> {city}</p>
+        <p>{country} </p>
+        <p>id: {id}</p>
+        <p>Year: {year}</p>
+        <p>Type: {type}</p>
+      </div>
 
-      {accessories.map((accessory, index) => (
-        <React.Fragment key={index}>
-          <p>{accessory}</p>
-          {index < accessories.length - 1 && <span>|</span>}
-        </React.Fragment>
-      ))}
-      <p> {functionalities[0]}</p>
-      <p>| {functionalities[1]}</p>
-      <p>| {functionalities[2]}</p>
-      <p> Rental Conditions: </p>
-      <p>
+      <div className={css.description}>
+        <p> FuelConsumption: {fuelConsumption}</p>
+        <p> EngineSize: {engineSize}</p>
+      </div>
+
+      <p className={css.detailedDescription}> {description}</p>
+      <p className={css.titleAccessoriesFunctionalities}>
         {' '}
-        {minimumAge}: <span>{minimumAgeNumber}</span>
+        Accessories and functionalities:{' '}
       </p>
-      <p> {secondRentalCondition}</p>
-      <p> {thirdRentalCondition}</p>
 
-      <p>Mileage: {mileage.toLocaleString('en-US')}</p>
-      <p>Price: {rentalPriceFormat}</p>
-      <a href="tel:+380730000000">Rental car</a>
+      <div className={css.description}>
+        <p> {accessories[0]}</p>
+        <p> {accessories[1]}</p>
+        <p> {accessories[2]}</p>
+      </div>
+      <div className={css.description}>
+        <p> {functionalities[0]}</p>
+        <p> {functionalities[1]}</p>
+        <p> {functionalities[2]}</p>
+      </div>
+
+      <p className={css.titleAccessoriesFunctionalities}>
+        {' '}
+        Rental Conditions:{' '}
+      </p>
+
+      <div className={css.itemConditionWrap}>
+        <p className={css.itemCondition}>
+          {minimumAge}:{' '}
+          <span className={css.itemConditionSpan}>{minimumAgeNumber}</span>
+        </p>
+        <p className={css.itemCondition}> {secondRentalCondition}</p>
+      </div>
+
+      <div className={css.itemConditionWrap}>
+        <p className={css.itemCondition}> {thirdRentalCondition}</p>
+        <p className={css.itemCondition}>
+          Mileage:{' '}
+          <span className={css.itemConditionSpan}>
+            {mileage.toLocaleString('en-US')}
+          </span>
+        </p>
+        <p className={css.itemCondition}>
+          Price:{' '}
+          <span className={css.itemConditionSpan}>{rentalPriceFormat}</span>
+        </p>
+      </div>
+
+      <a className={css.rentalButton} href="tel:+380730000000">
+        Rental car
+      </a>
     </div>
   );
+};
+
+CardDetails.propTypes = {
+  oneCar: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    make: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    model: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    rentalPrice: PropTypes.string.isRequired,
+    functionalities: PropTypes.arrayOf(PropTypes.string).isRequired,
+    fuelConsumption: PropTypes.string.isRequired,
+    engineSize: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    accessories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    rentalConditions: PropTypes.string.isRequired,
+    mileage: PropTypes.number.isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
 };

@@ -2,7 +2,6 @@
   width: 274px;
   height: 426px;
   overflow: hidden;
-  border: 1px solid grey;
 }
 .imageIconWrap {
   position: relative;
@@ -79,4 +78,8 @@
   background: #3470ff;
 
   cursor: pointer;
+}
+.button:hover,
+.button:focus {
+  background: #0b44cd;
 }

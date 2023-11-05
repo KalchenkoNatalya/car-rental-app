@@ -5,6 +5,7 @@ import css from './CardOneCar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsFavorite } from 'redux/selectors';
 import { addToFavorites, removeFromFavorites } from 'redux/carsAdvertsSlice';
+import PropTypes from 'prop-types';
 
 export const CardOneCar = ({ oneCar }) => {
   const {
@@ -26,7 +27,6 @@ export const CardOneCar = ({ oneCar }) => {
   const country = parts[2].trim();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //   const [modalActive, setModalActive] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -57,8 +57,6 @@ export const CardOneCar = ({ oneCar }) => {
   const isFavorite = favorites.some(car => car.id === oneCar.id);
 
   const handleClikIconHeart = () => {
-    // console.log(isFavorite);
-    // console.log(oneCar.id);
     if (isFavorite) {
       dispatch(removeFromFavorites(oneCar));
     } else {
@@ -130,21 +128,30 @@ export const CardOneCar = ({ oneCar }) => {
         <p>{shortestCharacteristic}</p>
       </div>
 
-      <button
-        type="button"
-        onClick={openModal}
-        className={css.button} //    onClick={()=>setModalActive(true)}
-      >
+      <button type="button" onClick={openModal} className={css.button}>
         Learn More
       </button>
-      <Modal
-        // active={modalActive}
-        // setActive={setModalActive}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      >
-        <CardDetails oneCar={oneCar} />
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <CardDetails oneCar={oneCar} onClose={closeModal} />
       </Modal>
     </div>
   );
+};
+
+
+
+CardOneCar.propTypes = {
+  oneCar: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    make: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    model: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    rentalPrice: PropTypes.string.isRequired,
+    rentalCompany: PropTypes.string.isRequired,
+    functionalities: PropTypes.arrayOf(PropTypes.string).isRequired,
+    accessories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
 };

@@ -1,0 +1,61 @@
+.sectionHomePage {
+  width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 80px;
+}
+.titleWrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 100px;
+}
+
+.title {
+  color: #121417;
+  border-radius: 20px;
+  width: 600px;
+  font-family: Manrope;
+  font-size: 116px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.05;
+}
+.text {
+  margin-top: 30px;
+  color: #121417;
+  border-radius: 20px;
+  font-family: Manrope;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.33333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photoWrap {
+  position: relative;
+}
+.photo {
+  border-top-right-radius: 120px;
+  border-top-left-radius: 90px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 120px;
+}
+
+.price {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  right: 0;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 18px;
+  width: 80px;
+  height: 80px;
+}
