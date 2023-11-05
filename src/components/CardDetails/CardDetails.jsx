@@ -1,5 +1,5 @@
 import React from 'react';
-import css from "./CardDetails.module.css"
+import css from './CardDetails.module.css';
 
 export const CardDetails = ({ oneCar }) => {
   const {
@@ -47,10 +47,6 @@ export const CardDetails = ({ oneCar }) => {
       <p>| EngineSize: {engineSize}</p>
       <p> {description}</p>
       <p> Accessories and functionalities: </p>
-      {/* <p> {accessories[0]}</p>
-      <p> {accessories[1]}</p>
-      <p> {accessories[2]}</p> */}
-      {/* {accessories.map(accessory => <p>{accessory}</p>)} */}
 
       {accessories.map((accessory, index) => (
         <React.Fragment key={index}>

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
 import { fromFilter } from 'redux/carsAdvertsSlice';
+import { useState } from 'react';
 
 const carMakes = [
   'Buick',
@@ -27,28 +28,41 @@ const carMakes = [
   'Land',
   'Tesla',
 ];
-export const Filter = ({ selectedFilter }) => {
+export const Filter = () => {
   const dispatch = useDispatch();
-  const handleSelectedFilter = event => {
-    dispatch(fromFilter(event.target.value));
-    console.log("в фільтрі обрали:", selectedFilter);
+  const [selectedValue, setSelectedValue] = useState('');
+
+  const handleSelectedFilter = e => {
+    setSelectedValue(e.target.value);
+  };
+  const handleSearchClick = () => {
+    dispatch(fromFilter(selectedValue));
+
+    console.log('в фільтрі обрали:', selectedValue);
   };
   return (
-    <div>
-      <label htmlFor="carMakeDropdown">Select Car Make: </label>
-      <select
-        id="carMakeDropdown"
-        value={selectedFilter}
-        className={css.filterSelect}
-        onChange={handleSelectedFilter}
-      >
-        <option value="">All Makes</option>
-        {carMakes.map(make => (
-          <option key={make} value={make}>
-            {make}
-          </option>
-        ))}
-      </select>
+    <div className={css.filterWrap}>
+      <div className={css.selectWrap}>
+        <label htmlFor="carMakeDropdown" className={css.label}>
+          Car brand{' '}
+        </label>
+        <select
+          id="carMakeDropdown"
+          value={selectedValue}
+          className={css.filterSelect}
+          onChange={handleSelectedFilter}
+        >
+          <option value="">Select brand</option>
+          {carMakes.map(make => (
+            <option key={make} value={make}>
+              {make}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button className={css.button} onClick={handleSearchClick}>
+        Search
+      </button>
     </div>
     // <select
     //   value={selectedFilter}

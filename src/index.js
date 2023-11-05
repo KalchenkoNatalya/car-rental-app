@@ -9,13 +9,13 @@ import { store } from 'redux/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-    <Provider     store={store}    >
-      {/* <PersistGate       persistor={persistor}      > */}
-        <BrowserRouter basename="/car-rental-app">
-          {' '}
-          <App />
-        </BrowserRouter>
-      {/* </PersistGate> */}
-    </Provider>
+  <Provider store={store}>
+    {/* <PersistGate       persistor={persistor}      > */}
+    <BrowserRouter basename="/car-rental-app">
+      {' '}
+      <App />
+    </BrowserRouter>
+    {/* </PersistGate> */}
+  </Provider>
   // </React.StrictMode>
 );

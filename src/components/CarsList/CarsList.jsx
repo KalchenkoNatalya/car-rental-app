@@ -1,15 +1,9 @@
 import { CardOneCar } from 'components/CardOneCar/CardOneCar';
-// import { useSelector } from 'react-redux';
-// import { selectCarsAdverts } from 'redux/selectors';
+import css from './CarsList.module.css';
 
-export const CarsList = ({cars}) => {
-  // const dataAllCars = useSelector(
-  //   state => state.carsAdvertsState.dataCarsAdverts
-  // );
-  // const dataAllCars = useSelector(selectCarsAdverts);
-  // console.log(cars);
+export const CarsList = ({ cars }) => {
   return (
-    <ul>
+    <ul className={css.listCar}>
       {cars.map(car => (
         <li key={car.id}>
           <CardOneCar oneCar={car} />

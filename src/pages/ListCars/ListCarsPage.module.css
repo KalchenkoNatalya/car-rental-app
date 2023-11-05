@@ -1,0 +1,24 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 150px;
+  padding-top: 150px;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  color: #3470ff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration-line: underline;
+  background-color: transparent;
+  border: none;
+  display: block;
+}

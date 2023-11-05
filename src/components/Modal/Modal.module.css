@@ -8,24 +8,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* transform: scale(0); */
   opacity: 0;
   pointer-events: none;
   overflow-y: auto;
 }
 
 .modal.active {
-    opacity: 1;
-    pointer-events: all;
-/* transform: scale(1); */
+  opacity: 1;
+  pointer-events: all;
 }
 .modalContent {
-position: absolute;
-top: 10%;
+  position: absolute;
+  top: 10%;
   padding: 20px;
   padding-left: auto;
   padding-right: auto;
-  /* height: 752px; */
   width: 541px;
   background-color: #fff;
   border-radius: 24px;

@@ -1,55 +1,43 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCarsAdvertsThunk } from '../redux/operations';
-import { Filter } from './Filter/Filter';
-import { CarsList } from './CarsList/CarsList';
+import FavoritePage from 'pages/Favorite/FavoritePage';
+import HomePage from 'pages/Home/HomePage';
 import { ListCarsPage } from 'pages/ListCars/ListCarsPage';
-import { selectCarsAdverts } from 'redux/selectors';
-// import { selectVisibleCarsAdverts } from "../redux/selectors";
+import { NavLink, Route, Routes } from 'react-router-dom';
+import css from './App.module.css';
 
 export const App = () => {
- 
-  // const allCarsAdverts = useSelector(selectCarsAdverts);
-
-  // console.log('allCarsAdverts', allCarsAdverts);
-
-
-  // const filter = useSelector(state => state.carsAdvertsState.filter);
-  // const filteredCarsAdverts = useSelector(selectVisibleCarsAdverts);
-  
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchCarsAdvertsThunk());
-  // }, [dispatch]);
-
   return (
     <div
     // className={css.wrap}
     >
-      <ListCarsPage />
-
-      {/* {filter === '' ? (
-      <ContactList
-        contacts={contacts}
-        onRemoveContacts={contactId => dispatch(deleteContact(contactId))}
-       
-      />
-    ) : (
-      <ContactList contacts={filteredContacts} />
-    )} */}
+      <header>
+        <nav>
+          <ul className={css.nav_list}>
+            <li>
+              <NavLink to="/" className={css.nav_link}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/catalog" className={css.nav_link}>
+                Car's catalog
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/favorite" className={css.nav_link}>
+                Favorite cars
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<ListCarsPage />} />
+          <Route path="/favorite" element={<FavoritePage />} />
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </main>
     </div>
-    // <div
-    //   style={{
-    //     height: '100vh',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     fontSize: 40,
-    //     color: '#010101'
-    //   }}
-    // >
-    //   React homework template
-    // </div>
   );
 };
