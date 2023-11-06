@@ -1,12 +1,15 @@
 import React from 'react';
 import css from './HomePage.module.css';
+import { NavLink } from 'react-router-dom';
 const HomePage = () => {
   return (
     <div>
       <section className={css.sectionHomePage}>
         <div className={css.titleWrap}>
           <div>
-            <h1 className={css.title}>NEED A RENT CAR?</h1>
+            <h1 className={css.title}>
+              NEED <br /> A RENT CAR?
+            </h1>
           </div>
 
           <div className={css.photoWrap}>
@@ -16,11 +19,23 @@ const HomePage = () => {
               alt="Rental car"
             />
 
-            <p className={css.price}>at $25/day</p>
+            <p className={css.price}>
+              at <br />
+              $25/day
+            </p>
           </div>
         </div>
 
-        <p className={css.text}>Get a car for rent Car's catalog</p>
+        <p className={css.text}>
+          Our cars are for your needs, <br />
+          <span>
+            {' '}
+            <NavLink to="/catalog" className={css.catalogLink}>
+              go to the catalog
+            </NavLink>
+          </span>{' '}
+          to choose{' '}
+        </p>
       </section>
     </div>
   );

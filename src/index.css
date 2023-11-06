@@ -34,3 +34,11 @@ li {
   --blue-color: #3470ff;
   --blue-hover-color: #0b44cd;
 }
+
+button {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}

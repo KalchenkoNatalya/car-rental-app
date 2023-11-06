@@ -9,26 +9,26 @@ export const App = () => {
     <div className={css.app}>
       <header>
         <nav>
-          <ul className={css.nav_list}>
+          <ul className={`${css.navList} ${css.container}`}>
             <li>
-              <NavLink to="/" className={css.nav_link}>
+              <NavLink to="/" className={css.navLink}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/catalog" className={css.nav_link}>
+              <NavLink to="/catalog" className={css.navLink}>
                 Car's catalog
               </NavLink>
             </li>
             <li>
-              <NavLink to="/favorite" className={css.nav_link}>
+              <NavLink to="/favorite" className={css.navLink}>
                 Favorite cars
               </NavLink>
             </li>
           </ul>
         </nav>
       </header>
-      <main>
+      <main className={css.container}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalog" element={<ListCarsPage />} />
