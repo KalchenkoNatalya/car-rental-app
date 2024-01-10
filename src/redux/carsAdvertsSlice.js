@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchCarsAdvertsThunk,
-  fetchFilterCarsAdvertsThunk,
-} from './operations';
+import { fetchAllCarsThunk, fetchFilterCarsAdvertsThunk } from './operations';
 
 const initialState = {
   isLoading: false,
   error: null,
   dataCarsAdverts: [],
   page: 1,
-  filter: '',
+  onFilter: false,
+  makeBrand: '',
   favorites: [],
+  priceFrom: '',
+  priceTo: '',
+  mileageFrom: '',
+  mileageTo: '',
 };
 
 const carsAdvertsSlise = createSlice({
@@ -21,7 +23,13 @@ const carsAdvertsSlise = createSlice({
       state.page = state.page += 1;
     },
     fromFilter: (state, action) => {
-      state.filter = action.payload;
+      console.log(action);
+      state.makeBrand = action.payload.selectedBrand;
+      state.priceFrom = action.payload.selectedPriceFrom;
+      state.priceTo = action.payload.selectedPriceTo;
+      state.mileageFrom = action.payload.selectedMileageFrom;
+      state.mileageTo = action.payload.selectedMileageTo;
+      state.onFilter = true;
     },
     addToFavorites: (state, action) => {
       state.favorites.push(action.payload);
@@ -40,16 +48,16 @@ const carsAdvertsSlise = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(fetchCarsAdvertsThunk.pending, state => {
+      .addCase(fetchAllCarsThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchCarsAdvertsThunk.fulfilled, (state, action) => {
+      .addCase(fetchAllCarsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.dataCarsAdverts = action.payload;
       })
-      .addCase(fetchCarsAdvertsThunk.rejected, (state, action) => {
+      .addCase(fetchAllCarsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
@@ -58,6 +66,7 @@ const carsAdvertsSlise = createSlice({
         state.error = null;
       })
       .addCase(fetchFilterCarsAdvertsThunk.fulfilled, (state, action) => {
+        console.log(action);
         state.isLoading = false;
         state.error = null;
         state.dataCarsAdverts = action.payload;

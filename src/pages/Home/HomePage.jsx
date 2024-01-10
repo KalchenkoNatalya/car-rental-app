@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './HomePage.module.css';
 import { NavLink } from 'react-router-dom';
+
 const HomePage = () => {
   return (
     <div>
@@ -36,6 +37,18 @@ const HomePage = () => {
           </span>{' '}
           to choose{' '}
         </p>
+        <p>For family vacations</p>
+        <img
+          className={css.photo}
+          src="https://res.cloudinary.com/daqddzmhs/image/upload/v1699269674/Travelling_uxey6w.jpg"
+          alt="Rental car"
+        />
+        <p>Romantic date</p>
+        <img
+          className={css.photo}
+          src="https://res.cloudinary.com/daqddzmhs/image/upload/v1699269674/Travelling_uxey6w.jpg"
+          alt="Rental car"
+        />
       </section>
     </div>
   );

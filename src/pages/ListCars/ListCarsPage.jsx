@@ -8,14 +8,19 @@ import {
   updateFavoritesFromStorage,
 } from 'redux/carsAdvertsSlice';
 import {
-  fetchCarsAdvertsThunk,
+  fetchAllCarsThunk,
   fetchFilterCarsAdvertsThunk,
 } from 'redux/operations';
 import {
   selectCarsAdverts,
   selectError,
-  selectFilteredCarsAdverts,
+  // selectMakeBrand,
   selectIsLoading,
+  selectOnFilter,
+  // selectPriceFrom,
+  // selectPriceTo,
+  // selectMileageFrom,
+  // selectMileageTo,
 } from 'redux/selectors';
 import css from './ListCarsPage.module.css';
 
@@ -23,12 +28,19 @@ export const ListCarsPage = () => {
   const dataAllCars = useSelector(selectCarsAdverts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const filter = useSelector(selectFilteredCarsAdverts);
+  // const makeBrand = useSelector(selectMakeBrand);
+  // const priceFrom = useSelector(selectPriceFrom);
+  // const priceTo = useSelector(selectPriceTo);
+  // const mileageFrom = useSelector(selectMileageFrom);
+  // const mileageTo = useSelector(selectMileageTo);
+
+  const onFilter = useSelector(selectOnFilter);
+
   const dispatch = useDispatch();
   const page = useSelector(state => state.carsAdvertsState.page);
 
   useEffect(() => {
-    dispatch(fetchCarsAdvertsThunk());
+    dispatch(fetchAllCarsThunk());
     const favoritesFromStorage = localStorage.getItem('favorites');
     const parseFavoritesFromStorage = favoritesFromStorage
       ? JSON.parse(favoritesFromStorage)
@@ -37,11 +49,17 @@ export const ListCarsPage = () => {
     dispatch(updateFavoritesFromStorage(parseFavoritesFromStorage));
   }, [dispatch, page]);
 
+  // useEffect(() => {
+  //   if (makeBrand === '') {
+  //     dispatch(fetchAllCarsThunk());
+  //   } else dispatch(fetchFilterCarsAdvertsThunk());
+  // }, [dispatch, makeBrand]);
+
   useEffect(() => {
-    if (filter === '') {
-      dispatch(fetchCarsAdvertsThunk());
+    if (!onFilter) {
+      dispatch(fetchAllCarsThunk());
     } else dispatch(fetchFilterCarsAdvertsThunk());
-  }, [dispatch, filter]);
+  }, [dispatch, onFilter]);
 
   const loadMore = () => {
     dispatch(pagePaginations());
