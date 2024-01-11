@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllCarsThunk, fetchFilterCarsAdvertsThunk } from './operations';
+import {
+  fetchAllCarsThunkLimit,
+  fetchFilterCarsAdvertsThunk,
+} from './operations';
 
 const initialState = {
   isLoading: false,
@@ -29,7 +32,15 @@ const carsAdvertsSlise = createSlice({
       state.priceTo = action.payload.selectedPriceTo;
       state.mileageFrom = action.payload.selectedMileageFrom;
       state.mileageTo = action.payload.selectedMileageTo;
-      state.onFilter = true;
+      if (
+        state.makeBrand !== '' ||
+        state.priceFrom !== '' ||
+        state.priceTo !== '' ||
+        state.mileageFrom !== '' ||
+        state.mileageTo !== ''
+      ) {
+        state.onFilter = true;
+      }
     },
     addToFavorites: (state, action) => {
       state.favorites.push(action.payload);
@@ -48,16 +59,16 @@ const carsAdvertsSlise = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(fetchAllCarsThunk.pending, state => {
+      .addCase(fetchAllCarsThunkLimit.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchAllCarsThunk.fulfilled, (state, action) => {
+      .addCase(fetchAllCarsThunkLimit.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.dataCarsAdverts = action.payload;
       })
-      .addCase(fetchAllCarsThunk.rejected, (state, action) => {
+      .addCase(fetchAllCarsThunkLimit.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })

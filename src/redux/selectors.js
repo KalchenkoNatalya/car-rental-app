@@ -9,3 +9,4 @@ export const selectPriceTo = state => state.carsAdvertsState.priceTo;
 export const selectMileageFrom = state => state.carsAdvertsState.mileageFrom;
 export const selectMileageTo = state => state.carsAdvertsState.mileageTo;
 export const selectOnFilter= state => state.carsAdvertsState.onFilter;
+export const selectPage= state => state.carsAdvertsState.page;

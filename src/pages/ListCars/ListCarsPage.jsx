@@ -8,39 +8,48 @@ import {
   updateFavoritesFromStorage,
 } from 'redux/carsAdvertsSlice';
 import {
-  fetchAllCarsThunk,
-  fetchFilterCarsAdvertsThunk,
+  fetchAllCarsThunkLimit,
+  fetchAllCarsThunkWithoutLimit,
 } from 'redux/operations';
 import {
   selectCarsAdverts,
   selectError,
-  // selectMakeBrand,
+  selectMakeBrand,
   selectIsLoading,
   selectOnFilter,
-  // selectPriceFrom,
-  // selectPriceTo,
-  // selectMileageFrom,
-  // selectMileageTo,
+  selectPriceFrom,
+  selectPriceTo,
+  selectMileageFrom,
+  selectMileageTo,
+  selectPage,
 } from 'redux/selectors';
+import { filteredCars } from 'components/Filter/FilteredCars';
 import css from './ListCarsPage.module.css';
 
 export const ListCarsPage = () => {
   const dataAllCars = useSelector(selectCarsAdverts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  // const makeBrand = useSelector(selectMakeBrand);
-  // const priceFrom = useSelector(selectPriceFrom);
-  // const priceTo = useSelector(selectPriceTo);
-  // const mileageFrom = useSelector(selectMileageFrom);
-  // const mileageTo = useSelector(selectMileageTo);
-
+  const makeBrand = useSelector(selectMakeBrand);
+  const priceFrom = useSelector(selectPriceFrom);
+  const priceTo = useSelector(selectPriceTo);
+  const mileageFrom = useSelector(selectMileageFrom);
+  const mileageTo = useSelector(selectMileageTo);
   const onFilter = useSelector(selectOnFilter);
+  const page = useSelector(selectPage);
 
   const dispatch = useDispatch();
-  const page = useSelector(state => state.carsAdvertsState.page);
 
+  // const filteredCarsArray = filteredCars(
+  //   dataAllCars,
+  //   makeBrand,
+  //   priceFrom,
+  //   priceTo,
+  //   mileageFrom,
+  //   mileageTo
+  // );
   useEffect(() => {
-    dispatch(fetchAllCarsThunk());
+    dispatch(fetchAllCarsThunkLimit());
     const favoritesFromStorage = localStorage.getItem('favorites');
     const parseFavoritesFromStorage = favoritesFromStorage
       ? JSON.parse(favoritesFromStorage)
@@ -57,22 +66,36 @@ export const ListCarsPage = () => {
 
   useEffect(() => {
     if (!onFilter) {
-      dispatch(fetchAllCarsThunk());
-    } else dispatch(fetchFilterCarsAdvertsThunk());
+      dispatch(fetchAllCarsThunkLimit());
+    } else dispatch(fetchAllCarsThunkWithoutLimit()); ;
   }, [dispatch, onFilter]);
 
+
+  // console.log(dataAllCars);
+  // console.log(makeBrand);
+  // console.log(priceFrom);
+  // console.log('filteredCarsArray:', filteredCarsArray);
+  // console.log('dataAllCars:', dataAllCars);
   const loadMore = () => {
     dispatch(pagePaginations());
   };
-
   return (
     <section className={css.section}>
       {isLoading && <Loader />}
       {error && <p>Error: {error}</p>}
-
       <Filter />
-
-      <CarsList cars={dataAllCars} />
+      {!onFilter ? (
+        <CarsList cars={dataAllCars} />
+      ) : (
+        <CarsList cars={filteredCars(
+            dataAllCars,
+            makeBrand,
+            priceFrom,
+            priceTo,
+            mileageFrom,
+            mileageTo
+          )} />
+      )}
 
       {dataAllCars.length === 12 && (
         <button onClick={loadMore} className={css.button}>

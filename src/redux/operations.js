@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 const baseURL = 'https://654383a901b5e279de208230.mockapi.io/api';
 const limit = 12;
 
-export const fetchAllCarsThunk = createAsyncThunk(
+export const fetchAllCarsThunkLimit = createAsyncThunk(
   'Advert/fetchAll',
   async (_, thunkAPI) => {
     try {
@@ -32,6 +32,23 @@ export const fetchFilterCarsAdvertsThunk = createAsyncThunk(
 
       const respons = await axios.get(`${baseURL}/Advert?make=${makeBrand}`);
 
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const fetchAllCarsThunkWithoutLimit = createAsyncThunk(
+  'Advert/fetchAll',
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+
+      const page = state.carsAdvertsState.page;
+
+      const respons = await axios.get(
+        `${baseURL}/Advert?page=${page}`
+      );
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
