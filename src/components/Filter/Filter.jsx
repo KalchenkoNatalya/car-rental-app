@@ -2,7 +2,9 @@ import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
 import { fromFilter } from 'redux/carsAdvertsSlice';
 import { useState } from 'react';
-
+import ReactInputMask from 'react-input-mask';
+import iconDown from '../iconDown.svg';
+import iconUp from '../iconUp.svg';
 const carMakes = [
   'Buick',
   'Volvo',
@@ -27,25 +29,79 @@ const carMakes = [
   'Land',
   'Tesla',
 ];
+const carPrice = [
+  'To $',
+  30,
+  40,
+  50,
+  60,
+  70,
+  80,
+  90,
+  100,
+  120,
+  150,
+  200,
+  250,
+  300,
+  400,
+  500,
+];
 export const Filter = () => {
   const dispatch = useDispatch();
   const [selectedBrand, setSelectedValue] = useState('');
-  const [selectedPriceFrom, setPriceFrom] = useState('');
-  const [selectedPriceTo, setPriceTo] = useState('');
+  const [selectedPrice, setSelectedPrice] = useState('');
+  // const [selectedPriceFrom, setPriceFrom] = useState('');
+  // const [selectedPriceTo, setPriceTo] = useState('');
   const [selectedMileageFrom, setMileageFrom] = useState('');
   const [selectedMileageTo, setMileageTo] = useState('');
+  const [isOpenSelectBrand, setOpenSelectBrand] = useState(false);
+  // const [isOpenSelectBrand, setOpenSelectBrand] = useState(true);
 
-  const handleSelectedFilter = e => {
-    setSelectedValue(e.target.value);
+  const handleOpenSelectedBrand = e => {
+    e.preventDefault();
+    setOpenSelectBrand(prev => !prev);
   };
+  const selectValuePrice = e => {
+    e.preventDefault();
+    const value = e.target.value;
+    // setSelectedPrice(`${value}$`);
+    // setSelectedPrice(value + `$`);
+
+    // setSelectedPrice(value + '$');
+    // setSelectedPrice(value);
+    const newSelectedPrice = value === 'To $' ? '' : `${value}$`;
+    setSelectedPrice(newSelectedPrice);
+    console.log(newSelectedPrice);
+  };
+
+  const handleMileageValueFrom = e => {
+    const value = e.target.value;
+    const numericValue = parseFloat(value.replace(/,/g, ''));
+    setMileageFrom(numericValue);
+  };
+  const handleMileageValueTo = e => {
+    const value = e.target.value;
+    const numericValue = parseFloat(value.replace(/,/g, ''));
+    setMileageTo(numericValue);
+  };
+
   const handleSearchClick = () => {
-    console.log(selectedBrand);
-    console.log(selectedPriceFrom);
-    console.log(selectedPriceTo);
-    console.log(selectedMileageFrom);
-    console.log(selectedMileageTo);
-    dispatch(fromFilter({selectedBrand, selectedPriceFrom, selectedPriceTo, selectedMileageFrom, selectedMileageTo }));
-    // dispatch(fromFilter(selectedValue));
+    // console.log(selectedBrand);
+    // console.log(selectedPriceFrom);
+    // console.log(selectedPriceTo);
+    // console.log(selectedMileageFrom);
+    // console.log(selectedMileageTo);
+    dispatch(
+      fromFilter({
+        selectedBrand,
+        selectedPrice:
+          selectedPrice === '' ? '' : `${parseInt(selectedPrice, 10)}`,
+        // selectedPriceTo,
+        selectedMileageFrom,
+        selectedMileageTo,
+      })
+    );
   };
   return (
     <div className={css.filterWrap}>
@@ -57,7 +113,9 @@ export const Filter = () => {
           id="carMakeDropdown"
           value={selectedBrand}
           className={css.filterSelect}
-          onChange={handleSelectedFilter}
+          // onChange={handleSelectedFilter}
+          onChange={e => setSelectedValue(e.target.value)}
+          onClick={handleOpenSelectedBrand}
         >
           <option value="">Select brand</option>
           {carMakes.map(make => (
@@ -66,52 +124,79 @@ export const Filter = () => {
             </option>
           ))}
         </select>
-        <div className={css.priceWrap}>
-        <label htmlFor="priceFrom" className={css.label}>
-          Price from{' '}
-        </label>
-
-        <input
-          type="text"
-          id="priceFrom"
-          className={css.input}
-          value={selectedPriceFrom}
-          onChange={e => setPriceFrom(e.target.value)}
-        />
-        <label htmlFor="priceTo" className={css.label}>
-          Price to{' '}
-        </label>
-        <input
-          type="text"
-          id="priceTo"
-          className={css.input}
-          value={selectedPriceTo}
-          onChange={e => setPriceTo(e.target.value)}
-        />
+        
+        {isOpenSelectBrand ? (
+          <svg width={25} height={25} className={css.iconArrow}>
+            <use href={iconUp + '#up'}></use>
+          </svg>
+        ) : (
+          <svg width={25} height={25} className={css.iconArrow}>
+            <use href={iconDown + '#down'}></use>
+          </svg>
+        )}
       </div>
+
+      {/* ----------------------------------price-------------------------------------------------------------------- */}
+      <div className={css.selectWrap}>
+        <label htmlFor="carPrice" className={css.label}>
+          Price/1hour
+        </label>
+        <select
+          id="carPrice"
+          // value={selectedPrice}
+          defaultValue={selectedPrice}
+          className={`${css.filterSelect} ${css.filterSelectPrice}`}
+          onChange={selectValuePrice}
+        >
+          {/* <option value="">To $</option> */}
+          {carPrice.map(price => (
+            <option key={price} value={price}>
+              {price}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className={css.mileageWrap}>
         <label htmlFor="mileageFrom" className={css.label}>
-          Mileage from{' '}
+          Car Mileage / km{' '}
         </label>
-        <input
-          type="text"
-          id="mileageFrom"
-          className={css.input}
-          value={selectedMileageFrom}
-          onChange={e => setMileageFrom(e.target.value)}
-        />
-        <label htmlFor="mileageTo" className={css.label}>
-          Mileage to{' '}
-        </label>
-        <input
-          type="text"
-          id="mileageTo"
-          className={css.input}
-          value={selectedMileageTo}
-          onChange={e => setMileageTo(e.target.value)}
-        />
+        <div className={css.mileage}>
+          <label
+            htmlFor="mileageFrom"
+            className={`${css.labelInput} ${css.labelInputMileageFrom}`}
+          >
+            From
+          </label>
+          <ReactInputMask
+            type="text"
+            id="mileageFrom"
+            mask="9,999"
+            title="Only number"
+            // className={classNames(css.filterMileage, css.filterMileageFrom)}
+            className={`${css.filterMileage} ${css.filterMileageFrom}`}
+            value={selectedMileageFrom}
+            onChange={handleMileageValueFrom}
+          />
+
+          <label
+            htmlFor="mileageTo"
+            className={`${css.labelInput} ${css.labelInputMileageTo}`}
+          >
+            To
+          </label>
+          <ReactInputMask
+            type="text"
+            id="mileageTo"
+            mask="9,999"
+            className={`${css.filterMileage} ${css.filterMileageTo}`}
+            value={selectedMileageTo}
+            // onChange={e => setMileageTo(e.target.value)}
+            onChange={handleMileageValueTo}
+          />
+        </div>
       </div>
-      </div>
+
       <button className={css.button} onClick={handleSearchClick}>
         Search
       </button>

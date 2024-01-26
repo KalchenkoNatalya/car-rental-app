@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchAllCarsThunkLimit,
-  fetchFilterCarsAdvertsThunk,
+  
 } from './operations';
 
 const initialState = {
@@ -12,8 +12,9 @@ const initialState = {
   onFilter: false,
   makeBrand: '',
   favorites: [],
-  priceFrom: '',
-  priceTo: '',
+  price: '',
+  // priceFrom: '',
+  // priceTo: '',
   mileageFrom: '',
   mileageTo: '',
 };
@@ -26,16 +27,18 @@ const carsAdvertsSlise = createSlice({
       state.page = state.page += 1;
     },
     fromFilter: (state, action) => {
-      console.log(action);
+      // console.log(action);
       state.makeBrand = action.payload.selectedBrand;
-      state.priceFrom = action.payload.selectedPriceFrom;
-      state.priceTo = action.payload.selectedPriceTo;
+      state.price = action.payload.selectedPrice;
+      // state.priceFrom = action.payload.selectedPriceFrom;
+      // state.priceTo = action.payload.selectedPriceTo;
       state.mileageFrom = action.payload.selectedMileageFrom;
       state.mileageTo = action.payload.selectedMileageTo;
       if (
         state.makeBrand !== '' ||
-        state.priceFrom !== '' ||
-        state.priceTo !== '' ||
+        // state.priceFrom !== '' ||
+        // state.priceTo !== '' ||
+        state.price !== '' ||
         state.mileageFrom !== '' ||
         state.mileageTo !== ''
       ) {
@@ -71,21 +74,21 @@ const carsAdvertsSlise = createSlice({
       .addCase(fetchAllCarsThunkLimit.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      })
-      .addCase(fetchFilterCarsAdvertsThunk.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(fetchFilterCarsAdvertsThunk.fulfilled, (state, action) => {
-        console.log(action);
-        state.isLoading = false;
-        state.error = null;
-        state.dataCarsAdverts = action.payload;
-      })
-      .addCase(fetchFilterCarsAdvertsThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
       }),
+  // .addCase(fetchFilterCarsAdvertsThunk.pending, state => {
+  //   state.isLoading = true;
+  //   state.error = null;
+  // })
+  // .addCase(fetchFilterCarsAdvertsThunk.fulfilled, (state, action) => {
+  //   console.log(action);
+  //   state.isLoading = false;
+  //   state.error = null;
+  //   state.dataCarsAdverts = action.payload;
+  // })
+  // .addCase(fetchFilterCarsAdvertsThunk.rejected, (state, action) => {
+  //   state.isLoading = false;
+  //   state.error = action.payload;
+  // }),
 });
 
 export const {

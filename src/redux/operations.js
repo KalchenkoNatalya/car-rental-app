@@ -22,22 +22,22 @@ export const fetchAllCarsThunkLimit = createAsyncThunk(
   }
 );
 
-export const fetchFilterCarsAdvertsThunk = createAsyncThunk(
-  'Advert/fetchFilter',
-  async (_, thunkAPI) => {
-    try {
-      const state = thunkAPI.getState();
+// export const fetchFilterCarsAdvertsThunk = createAsyncThunk(
+//   'Advert/fetchFilter',
+//   async (_, thunkAPI) => {
+//     try {
+//       const state = thunkAPI.getState();
 
-      const makeBrand = state.carsAdvertsState.makeBrand;
+//       const makeBrand = state.carsAdvertsState.makeBrand;
 
-      const respons = await axios.get(`${baseURL}/Advert?make=${makeBrand}`);
+//       const respons = await axios.get(`${baseURL}/Advert?make=${makeBrand}`);
 
-      return respons.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       return respons.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 export const fetchAllCarsThunkWithoutLimit = createAsyncThunk(
   'Advert/fetchAll',
   async (_, thunkAPI) => {

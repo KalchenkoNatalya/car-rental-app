@@ -17,11 +17,12 @@ import {
   selectMakeBrand,
   selectIsLoading,
   selectOnFilter,
-  selectPriceFrom,
-  selectPriceTo,
+  // selectPriceFrom,
+  // selectPriceTo,
   selectMileageFrom,
   selectMileageTo,
   selectPage,
+  selectPrice,
 } from 'redux/selectors';
 import { filteredCars } from 'components/Filter/FilteredCars';
 import css from './ListCarsPage.module.css';
@@ -31,8 +32,9 @@ export const ListCarsPage = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const makeBrand = useSelector(selectMakeBrand);
-  const priceFrom = useSelector(selectPriceFrom);
-  const priceTo = useSelector(selectPriceTo);
+  const price = useSelector(selectPrice);
+  // const priceFrom = useSelector(selectPriceFrom);
+  // const priceTo = useSelector(selectPriceTo);
   const mileageFrom = useSelector(selectMileageFrom);
   const mileageTo = useSelector(selectMileageTo);
   const onFilter = useSelector(selectOnFilter);
@@ -90,8 +92,9 @@ export const ListCarsPage = () => {
         <CarsList cars={filteredCars(
             dataAllCars,
             makeBrand,
-            priceFrom,
-            priceTo,
+            price,
+            // priceFrom,
+            // priceTo,
             mileageFrom,
             mileageTo
           )} />
