@@ -56,12 +56,17 @@ export const Filter = () => {
   const [selectedMileageFrom, setMileageFrom] = useState('');
   const [selectedMileageTo, setMileageTo] = useState('');
   const [isOpenSelectBrand, setOpenSelectBrand] = useState(false);
-  // const [isOpenSelectBrand, setOpenSelectBrand] = useState(true);
+  const [isOpenSelectedPrice, setIsOpenSelectedPrice] = useState(false);
 
   const handleOpenSelectedBrand = e => {
     e.preventDefault();
     setOpenSelectBrand(prev => !prev);
   };
+  const handleOpenSelectedPrice = e => {
+    e.preventDefault();
+    setIsOpenSelectedPrice(prev => !prev);
+  };
+
   const selectValuePrice = e => {
     e.preventDefault();
     const value = e.target.value;
@@ -124,13 +129,13 @@ export const Filter = () => {
             </option>
           ))}
         </select>
-        
+
         {isOpenSelectBrand ? (
-          <svg width={25} height={25} className={css.iconArrow}>
+          <svg width={25} height={25} className={css.iconArrowBrand}>
             <use href={iconUp + '#up'}></use>
           </svg>
         ) : (
-          <svg width={25} height={25} className={css.iconArrow}>
+          <svg width={25} height={25} className={css.iconArrowBrand}>
             <use href={iconDown + '#down'}></use>
           </svg>
         )}
@@ -147,6 +152,7 @@ export const Filter = () => {
           defaultValue={selectedPrice}
           className={`${css.filterSelect} ${css.filterSelectPrice}`}
           onChange={selectValuePrice}
+          onClick={handleOpenSelectedPrice}
         >
           {/* <option value="">To $</option> */}
           {carPrice.map(price => (
@@ -155,6 +161,15 @@ export const Filter = () => {
             </option>
           ))}
         </select>
+        {isOpenSelectedPrice ? (
+          <svg width={25} height={25} className={css.iconArrowPrice}>
+            <use href={iconUp + '#up'}></use>
+          </svg>
+        ) : (
+          <svg width={25} height={25} className={css.iconArrowPrice}>
+            <use href={iconDown + '#down'}></use>
+          </svg>
+        )}
       </div>
 
       <div className={css.mileageWrap}>
