@@ -85,18 +85,18 @@ export const Filter = () => {
     setIsOpenSelectedPrice(prev => !prev);
   };
 
-  const selectValuePrice = e => {
-    e.preventDefault();
-    const value = e.target.value;
-    // setSelectedPrice(`${value}$`);
-    // setSelectedPrice(value + `$`);
+  // const selectValuePrice = e => {
+  //   e.preventDefault();
+  //   const value = e.target.value;
+  //   // setSelectedPrice(`${value}$`);
+  //   // setSelectedPrice(value + `$`);
 
-    // setSelectedPrice(value + '$');
-    // setSelectedPrice(value);
-    const newSelectedPrice = value === 'To $' ? '' : `${value}$`;
-    // console.log(newSelectedPrice);
-    setSelectedPrice(newSelectedPrice);
-  };
+  //   // setSelectedPrice(value + '$');
+  //   // setSelectedPrice(value);
+  //   const newSelectedPrice = value === 'To $' ? '' : `${value}$`;
+  //   // console.log(newSelectedPrice);
+  //   setSelectedPrice(newSelectedPrice);
+  // };
 
   const handleMileageValueFrom = e => {
     const value = e.target.value;
