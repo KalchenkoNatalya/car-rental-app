@@ -37,7 +37,7 @@ const HomePage = () => {
           </span>{' '}
           to choose{' '}
         </p>
-        <p>For family vacations</p>
+        <p className={css.rentPurpose}>For family vacations</p>
         <img
           className={css.photo}
           src="https://res.cloudinary.com/daqddzmhs/image/upload/v1699269674/Travelling_uxey6w.jpg"

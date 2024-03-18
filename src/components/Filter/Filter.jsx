@@ -48,7 +48,7 @@ const carMakes = [
 //   500,
 // ];
 const carPrice = [
-  'To $',
+  // 'To $',
   30,
   40,
   50,
@@ -186,7 +186,7 @@ export const Filter = () => {
           // onChange={selectValuePrice}
           onClick={handleOpenSelectedPrice}
         >
-          {/* <option value="">To $</option>  */}
+          <option value="">To $</option> 
           {carPrice.map(price => (
             <option key={price} value={price}>
               {price}
