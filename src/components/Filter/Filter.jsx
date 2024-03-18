@@ -1,6 +1,6 @@
 import css from './Filter.module.css';
 import { useDispatch } from 'react-redux';
-import { fromFilter } from 'redux/carsAdvertsSlice';
+import { fromFilter, updatePageToFirst } from 'redux/carsAdvertsSlice';
 import { useState } from 'react';
 import ReactInputMask from 'react-input-mask';
 import iconDown from '../iconDown.svg';
@@ -29,6 +29,24 @@ const carMakes = [
   'Land',
   'Tesla',
 ];
+// const carPrice = [
+//   'To $',
+//   30,
+//   40,
+//   50,
+//   60,
+//   70,
+//   80,
+//   90,
+//   100,
+//   120,
+//   150,
+//   200,
+//   250,
+//   300,
+//   400,
+//   500,
+// ];
 const carPrice = [
   'To $',
   30,
@@ -76,8 +94,8 @@ export const Filter = () => {
     // setSelectedPrice(value + '$');
     // setSelectedPrice(value);
     const newSelectedPrice = value === 'To $' ? '' : `${value}$`;
+    // console.log(newSelectedPrice);
     setSelectedPrice(newSelectedPrice);
-    console.log(newSelectedPrice);
   };
 
   const handleMileageValueFrom = e => {
@@ -92,53 +110,65 @@ export const Filter = () => {
   };
 
   const handleSearchClick = () => {
-    // console.log(selectedBrand);
-    // console.log(selectedPriceFrom);
-    // console.log(selectedPriceTo);
-    // console.log(selectedMileageFrom);
-    // console.log(selectedMileageTo);
     dispatch(
       fromFilter({
         selectedBrand,
         selectedPrice:
           selectedPrice === '' ? '' : `${parseInt(selectedPrice, 10)}`,
-        // selectedPriceTo,
         selectedMileageFrom,
         selectedMileageTo,
       })
     );
   };
+
+  const handleClearSearchClick = e => {
+    e.preventDefault();
+    dispatch(
+      fromFilter({
+        selectedBrand: '',
+        selectedPrice: '',
+        selectedMileageFrom: '',
+        selectedMileageTo: '',
+      })
+    );
+    dispatch(updatePageToFirst());
+    setSelectedValue('Select brand');
+    setSelectedPrice('');
+    setMileageFrom('');
+    setMileageTo('');
+  };
+  console.log('selectedPrice:', selectedPrice);
+
   return (
     <div className={css.filterWrap}>
       <div className={css.selectWrap}>
         <label htmlFor="carMakeDropdown" className={css.label}>
           Car brand{' '}
         </label>
-        <select
-          id="carMakeDropdown"
-          value={selectedBrand}
-          className={css.filterSelect}
-          // onChange={handleSelectedFilter}
-          onChange={e => setSelectedValue(e.target.value)}
-          onClick={handleOpenSelectedBrand}
-        >
-          <option value="">Select brand</option>
-          {carMakes.map(make => (
-            <option key={make} value={make}>
-              {make}
-            </option>
-          ))}
-        </select>
-
-        {isOpenSelectBrand ? (
-          <svg width={25} height={25} className={css.iconArrowBrand}>
-            <use href={iconUp + '#up'}></use>
-          </svg>
-        ) : (
-          <svg width={25} height={25} className={css.iconArrowBrand}>
-            <use href={iconDown + '#down'}></use>
-          </svg>
-        )}
+        <div className={css.selectContainer}>
+          <select
+            id="carMakeDropdown"
+            value={selectedBrand}
+            className={css.filterSelect}
+            onChange={e => setSelectedValue(e.target.value)}
+            onClick={handleOpenSelectedBrand}
+          >
+            <option value="">Select brand</option>
+            {carMakes.map(make => (
+              <option key={make} value={make}>
+                {make}
+              </option>
+            ))}
+          </select>
+          <div className={css.iconContainer} onClick={handleOpenSelectedBrand}>
+            <svg width={25} height={25} className={css.iconArrowBrand}>
+              <use
+                // href={isOpenSelectBrand ? iconDown + '#down' : iconUp + '#up'}
+                href={isOpenSelectBrand ? iconUp + '#up' : iconDown + '#down'}
+              ></use>
+            </svg>
+          </div>
+        </div>
       </div>
 
       {/* ----------------------------------price-------------------------------------------------------------------- */}
@@ -148,19 +178,23 @@ export const Filter = () => {
         </label>
         <select
           id="carPrice"
-          // value={selectedPrice}
-          defaultValue={selectedPrice}
+          value={selectedPrice}
+          // defaultValue={selectedPrice}
           className={`${css.filterSelect} ${css.filterSelectPrice}`}
-          onChange={selectValuePrice}
+          // onChange={e => setSelectedPrice(e.target.value)}
+          onChange={e => setSelectedPrice(e.target.value)}
+          // onChange={selectValuePrice}
           onClick={handleOpenSelectedPrice}
         >
-          {/* <option value="">To $</option> */}
+          {/* <option value="">To $</option>  */}
           {carPrice.map(price => (
             <option key={price} value={price}>
               {price}
             </option>
           ))}
         </select>
+        {/* {selectedPrice !== '' && <div className={css.iconDollar}>$</div>} */}
+
         {isOpenSelectedPrice ? (
           <svg width={25} height={25} className={css.iconArrowPrice}>
             <use href={iconUp + '#up'}></use>
@@ -211,10 +245,14 @@ export const Filter = () => {
           />
         </div>
       </div>
-
-      <button className={css.button} onClick={handleSearchClick}>
-        Search
-      </button>
+      <div className={css.buttonWrap}>
+        <button className={css.button} onClick={handleSearchClick}>
+          Search
+        </button>
+        <button className={css.button} onClick={handleClearSearchClick}>
+          Clear search
+        </button>
+      </div>
     </div>
   );
 };

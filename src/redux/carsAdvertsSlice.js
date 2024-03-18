@@ -35,16 +35,15 @@ const carsAdvertsSlise = createSlice({
       state.mileageFrom = action.payload.selectedMileageFrom;
       state.mileageTo = action.payload.selectedMileageTo;
       if (
-        state.makeBrand !== '' ||
+        (state.makeBrand !== '' && state.makeBrand !== 'Select brand')||
         // state.priceFrom !== '' ||
         // state.priceTo !== '' ||
-        state.price !== '' ||
+        (state.price !== '' && state.price !== 'NaN')||
         state.mileageFrom !== '' ||
         state.mileageTo !== ''
       ) {
         state.onFilter = true;
-      }
-    },
+      } else {state.onFilter = false;}    },
     addToFavorites: (state, action) => {
       state.favorites.push(action.payload);
     },

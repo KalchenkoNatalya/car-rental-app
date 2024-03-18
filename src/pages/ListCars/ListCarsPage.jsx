@@ -40,8 +40,16 @@ export const ListCarsPage = () => {
   const onFilter = useSelector(selectOnFilter);
   const page = useSelector(selectPage);
 
-  const dispatch = useDispatch();
+  const filteredCarsList = filteredCars(
+    dataAllCars,
+    makeBrand,
+    price,
+    mileageFrom,
+    mileageTo
+  );
+  console.log("filteredCarsList:", filteredCarsList);
 
+  const dispatch = useDispatch();
   // const filteredCarsArray = filteredCars(
   //   dataAllCars,
   //   makeBrand,
@@ -69,9 +77,8 @@ export const ListCarsPage = () => {
   useEffect(() => {
     if (!onFilter) {
       dispatch(fetchAllCarsThunkLimit());
-    } else dispatch(fetchAllCarsThunkWithoutLimit()); ;
+    } else dispatch(fetchAllCarsThunkWithoutLimit());
   }, [dispatch, onFilter]);
-
 
   // console.log(dataAllCars);
   // console.log(makeBrand);
@@ -89,17 +96,12 @@ export const ListCarsPage = () => {
       {!onFilter ? (
         <CarsList cars={dataAllCars} />
       ) : (
-        <CarsList cars={filteredCars(
-            dataAllCars,
-            makeBrand,
-            price,
-            // priceFrom,
-            // priceTo,
-            mileageFrom,
-            mileageTo
-          )} />
+        <CarsList cars={filteredCarsList} />
       )}
-
+      {filteredCarsList.length === 0 && (
+        <p>Oops, nothing found, try searching again</p>
+      )}
+    
       {dataAllCars.length === 12 && (
         <button onClick={loadMore} className={css.button}>
           Load More

@@ -7,14 +7,18 @@ export const filteredCars = (
   mileageFrom,
   mileageTo
 ) => {
-  return dataAllCars?.filter(oneCar => {
+
+  return   dataAllCars?.filter(oneCar => {
     let filterResult = true;
     const carPriceInArray = parseInt(oneCar.rentalPrice.replace(/\D/g, ''), 10);
-    if (makeBrand) {
+    // if (makeBrand) {
+    //   filterResult = oneCar.make === makeBrand;
+    // }
+    if (makeBrand !== '' && makeBrand !== 'Select brand') {
       filterResult = oneCar.make === makeBrand;
     }
     if (price) {
-      if (!(carPriceInArray<= price)) {
+      if (!(carPriceInArray <= price)) {
         filterResult = false;
       }
     }
@@ -49,57 +53,12 @@ export const filteredCars = (
         filterResult = false;
       }
     }
-
+    // console.log(filterResult);
+    //  console.log(dataAllCars);
     return filterResult;
+   
   });
 };
 
-// export const filteredCars = (
-//   dataAllCars,
-//   makeBrand,
-//   priceFrom,
-//   priceTo,
-//   mileageFrom,
-//   mileageTo
-// ) => {
-//   return dataAllCars?.filter(oneCar => {
-//     let filterResult = false;
-//     const carPriceInArray = parseInt(oneCar.rentalPrice.replace(/\D/g, ''), 10);
-//     if (makeBrand) {
-//       filterResult = oneCar.make === makeBrand;
-//     }
-//     if (priceFrom) {
-//       if (carPriceInArray >= priceFrom) {
-//         filterResult = true;
-//       }
-//     }
-//     if (priceTo) {
-//       if (carPriceInArray <= priceTo) {
-//         filterResult = true;
-//       }
-//     }
-//     if (priceFrom && priceTo) {
-//       if (carPriceInArray >= priceFrom && carPriceInArray <= priceTo) {
-//         filterResult = true;
-//       }
-//     }
 
-//     if (mileageFrom) {
-//       if (oneCar.mileage >= mileageFrom) {
-//         filterResult = true;
-//       }
-//     }
-//     if (mileageTo) {
-//       if (oneCar.mileage <= mileageTo) {
-//         filterResult = true;
-//       }
-//     }
-//     if (mileageFrom && mileageTo) {
-//       if (oneCar.mileage >= mileageFrom && oneCar.mileage <= mileageTo) {
-//         filterResult = true;
-//       }
-//     }
-
-//     return filterResult;
-//   });
-// };
+console.log(filteredCars);
