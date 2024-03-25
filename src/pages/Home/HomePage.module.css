@@ -2,11 +2,14 @@
   margin-left: auto;
   margin-right: auto;
   padding-top: 80px;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 .titleWrap {
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
+  gap: 20px;
 }
 
 .title {
@@ -17,13 +20,13 @@
   font-weight: 500;
   line-height: 1.05;
   @media (min-width: 375px) {
-    font-size: 40px;
+    font-size: 30px;
   }
   @media (min-width: 768px) {
-    font-size: 70px;
+    font-size: 60px;
   }
   @media (min-width: 1440px) {
-    font-size: 116px;
+    font-size: 100px;
   }
 }
 .text {
@@ -112,4 +115,44 @@
   color: #007bff;
   cursor: pointer;
 }
+.familyWrap {
+  display: flex;
+  margin-top: 60px;
+  align-items: center;
+  justify-content: space-around;
+}
+.textForNeed {
+  @media (min-width: 375px) {
+      font-size: 20px;
+  }
+  @media (min-width: 768px) {
+     font-size: 40px;
+  }
+  @media (min-width: 1440px) {
 
+  }
+
+}
+.photoFamily {
+  width: 60%;
+  --animate-duration: 3s;
+}
+
+.dateWrap {
+  display: flex;
+  margin-top: 60px;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+}
+
+.photoDate {
+  width: 60%;
+  --animate-duration: 3s;
+
+  border-top-right-radius: 90px;
+  border-top-left-radius: 120px;
+  border-bottom-left-radius: 120px;
+  border-bottom-right-radius: 50px;
+}
