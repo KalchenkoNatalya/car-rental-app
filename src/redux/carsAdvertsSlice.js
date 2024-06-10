@@ -1,8 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchAllCarsThunkLimit,
-  
-} from './operations';
+import { fetchAllCarsThunkLimit } from './operations';
 
 const initialState = {
   isLoading: false,
@@ -13,8 +10,7 @@ const initialState = {
   makeBrand: '',
   favorites: [],
   price: '',
-  // priceFrom: '',
-  // priceTo: '',
+
   mileageFrom: '',
   mileageTo: '',
 };
@@ -27,23 +23,21 @@ const carsAdvertsSlise = createSlice({
       state.page = state.page += 1;
     },
     fromFilter: (state, action) => {
-      // console.log(action);
       state.makeBrand = action.payload.selectedBrand;
       state.price = action.payload.selectedPrice;
-      // state.priceFrom = action.payload.selectedPriceFrom;
-      // state.priceTo = action.payload.selectedPriceTo;
       state.mileageFrom = action.payload.selectedMileageFrom;
       state.mileageTo = action.payload.selectedMileageTo;
       if (
-        (state.makeBrand !== '' && state.makeBrand !== 'Select brand')||
-        // state.priceFrom !== '' ||
-        // state.priceTo !== '' ||
-        (state.price !== '' && state.price !== 'NaN')||
+        (state.makeBrand !== '' && state.makeBrand !== 'Select brand') ||
+        (state.price !== '' && state.price !== 'NaN') ||
         state.mileageFrom !== '' ||
         state.mileageTo !== ''
       ) {
         state.onFilter = true;
-      } else {state.onFilter = false;}    },
+      } else {
+        state.onFilter = false;
+      }
+    },
     addToFavorites: (state, action) => {
       state.favorites.push(action.payload);
     },
@@ -74,20 +68,6 @@ const carsAdvertsSlise = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       }),
-  // .addCase(fetchFilterCarsAdvertsThunk.pending, state => {
-  //   state.isLoading = true;
-  //   state.error = null;
-  // })
-  // .addCase(fetchFilterCarsAdvertsThunk.fulfilled, (state, action) => {
-  //   console.log(action);
-  //   state.isLoading = false;
-  //   state.error = null;
-  //   state.dataCarsAdverts = action.payload;
-  // })
-  // .addCase(fetchFilterCarsAdvertsThunk.rejected, (state, action) => {
-  //   state.isLoading = false;
-  //   state.error = action.payload;
-  // }),
 });
 
 export const {

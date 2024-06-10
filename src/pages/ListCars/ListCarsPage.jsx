@@ -17,8 +17,6 @@ import {
   selectMakeBrand,
   selectIsLoading,
   selectOnFilter,
-  // selectPriceFrom,
-  // selectPriceTo,
   selectMileageFrom,
   selectMileageTo,
   selectPage,
@@ -33,8 +31,6 @@ export const ListCarsPage = () => {
   const error = useSelector(selectError);
   const makeBrand = useSelector(selectMakeBrand);
   const price = useSelector(selectPrice);
-  // const priceFrom = useSelector(selectPriceFrom);
-  // const priceTo = useSelector(selectPriceTo);
   const mileageFrom = useSelector(selectMileageFrom);
   const mileageTo = useSelector(selectMileageTo);
   const onFilter = useSelector(selectOnFilter);
@@ -47,17 +43,10 @@ export const ListCarsPage = () => {
     mileageFrom,
     mileageTo
   );
-  console.log("filteredCarsList:", filteredCarsList);
+  console.log('filteredCarsList:', filteredCarsList);
 
   const dispatch = useDispatch();
-  // const filteredCarsArray = filteredCars(
-  //   dataAllCars,
-  //   makeBrand,
-  //   priceFrom,
-  //   priceTo,
-  //   mileageFrom,
-  //   mileageTo
-  // );
+
   useEffect(() => {
     dispatch(fetchAllCarsThunkLimit());
     const favoritesFromStorage = localStorage.getItem('favorites');
@@ -68,23 +57,12 @@ export const ListCarsPage = () => {
     dispatch(updateFavoritesFromStorage(parseFavoritesFromStorage));
   }, [dispatch, page]);
 
-  // useEffect(() => {
-  //   if (makeBrand === '') {
-  //     dispatch(fetchAllCarsThunk());
-  //   } else dispatch(fetchFilterCarsAdvertsThunk());
-  // }, [dispatch, makeBrand]);
-
   useEffect(() => {
     if (!onFilter) {
       dispatch(fetchAllCarsThunkLimit());
     } else dispatch(fetchAllCarsThunkWithoutLimit());
   }, [dispatch, onFilter]);
 
-  // console.log(dataAllCars);
-  // console.log(makeBrand);
-  // console.log(priceFrom);
-  // console.log('filteredCarsArray:', filteredCarsArray);
-  // console.log('dataAllCars:', dataAllCars);
   const loadMore = () => {
     dispatch(pagePaginations());
   };
@@ -101,7 +79,7 @@ export const ListCarsPage = () => {
       {filteredCarsList.length === 0 && (
         <p>Oops, nothing found, try searching again</p>
       )}
-    
+
       {dataAllCars.length === 12 && (
         <button onClick={loadMore} className={css.button}>
           Load More

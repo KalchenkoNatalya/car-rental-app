@@ -38,7 +38,7 @@ export const App = () => {
       </main>
       <footer className={css.footer}>
         <h2>Contact Us</h2>
-        <p>
+        <p className={css.container}>
           If you have any questions or need assistance, please contact us at:
         </p>
         <p>

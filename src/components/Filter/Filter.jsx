@@ -26,78 +26,65 @@ const carMakes = [
   'Chevrolet',
   'Chrysler',
   'Kia',
-  'Land',
+  'Land Rover',
   'Tesla',
 ];
-// const carPrice = [
-//   'To $',
-//   30,
-//   40,
-//   50,
-//   60,
-//   70,
-//   80,
-//   90,
-//   100,
-//   120,
-//   150,
-//   200,
-//   250,
-//   300,
-//   400,
-//   500,
-// ];
+
 const carPrice = [
-  // 'To $',
-  30,
-  40,
-  50,
-  60,
-  70,
-  80,
-  90,
-  100,
-  120,
-  150,
-  200,
-  250,
-  300,
-  400,
-  500,
+  30, 40, 50, 60, 70, 80, 90, 100, 120, 150, 200, 250, 300, 400, 500,
 ];
+
 export const Filter = () => {
   const dispatch = useDispatch();
   const [selectedBrand, setSelectedValue] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
-  // const [selectedPriceFrom, setPriceFrom] = useState('');
-  // const [selectedPriceTo, setPriceTo] = useState('');
   const [selectedMileageFrom, setMileageFrom] = useState('');
   const [selectedMileageTo, setMileageTo] = useState('');
   const [isOpenSelectBrand, setOpenSelectBrand] = useState(false);
-  const [isOpenSelectedPrice, setIsOpenSelectedPrice] = useState(false);
+  const [isOpenSelectedPrice, setIsOpenSelectPrice] = useState(false);
+  console.log('isOpenSelectBrand', isOpenSelectBrand);
+  console.log('isOpenSelectedPrice', isOpenSelectedPrice);
 
   const handleOpenSelectedBrand = e => {
-    e.preventDefault();
     setOpenSelectBrand(prev => !prev);
   };
   const handleOpenSelectedPrice = e => {
-    e.preventDefault();
-    setIsOpenSelectedPrice(prev => !prev);
+    setIsOpenSelectPrice(prev => !prev);
   };
 
-  // const selectValuePrice = e => {
-  //   e.preventDefault();
-  //   const value = e.target.value;
-  //   // setSelectedPrice(`${value}$`);
-  //   // setSelectedPrice(value + `$`);
+  const openSelectBrand = e => {
+    e.preventDefault();
+    if (isOpenSelectBrand) {
+      closeSelectBrand();
+    } else {
+      setOpenSelectBrand(true);
+      //показуємо випадаючий список
+      const carMakeDropdown = document.getElementById('carMakeDropdown');
+      carMakeDropdown.size = carMakes.length + 1;
+    }
+  };
 
-  //   // setSelectedPrice(value + '$');
-  //   // setSelectedPrice(value);
-  //   const newSelectedPrice = value === 'To $' ? '' : `${value}$`;
-  //   // console.log(newSelectedPrice);
-  //   setSelectedPrice(newSelectedPrice);
-  // };
+  const closeSelectBrand = () => {
+    setOpenSelectBrand(false);
+    const carMakeDropdown = document.getElementById('carMakeDropdown');
+    carMakeDropdown.size = 1; // Повертаємо розмір до 1, щоб сховати випадаючий список
+  };
 
+  const clickSelectPrice = e => {
+    e.preventDefault();
+    if (isOpenSelectedPrice) {
+      closeSelectPrice();
+    } else {
+      setIsOpenSelectPrice(true);
+      const carPriceSelect = document.getElementById('carPrice');
+      carPriceSelect.size = carPrice.length + 1;
+    }
+  };
+  const closeSelectPrice = e => {
+    setIsOpenSelectPrice(false);
+    const carPriceSelect = document.getElementById('carPrice');
+    carPriceSelect.size = 1;
+  };
   const handleMileageValueFrom = e => {
     const value = e.target.value;
     const numericValue = parseFloat(value.replace(/,/g, ''));
@@ -137,7 +124,6 @@ export const Filter = () => {
     setMileageFrom('');
     setMileageTo('');
   };
-  console.log('selectedPrice:', selectedPrice);
 
   return (
     <div className={css.filterWrap}>
@@ -150,20 +136,24 @@ export const Filter = () => {
             id="carMakeDropdown"
             value={selectedBrand}
             className={css.filterSelect}
-            onChange={e => setSelectedValue(e.target.value)}
+            onChange={e => {
+              setSelectedValue(e.target.value);
+              closeSelectBrand();
+              handleOpenSelectedBrand();
+            }}
             onClick={handleOpenSelectedBrand}
           >
             <option value="">Select brand</option>
             {carMakes.map(make => (
-              <option key={make} value={make}>
+              <option key={make} value={make} className={css.optionSelect}>
                 {make}
               </option>
             ))}
           </select>
-          <div className={css.iconContainer} onClick={handleOpenSelectedBrand}>
+
+          <div className={css.iconContainer} onClick={openSelectBrand}>
             <svg width={25} height={25} className={css.iconArrowBrand}>
               <use
-                // href={isOpenSelectBrand ? iconDown + '#down' : iconUp + '#up'}
                 href={isOpenSelectBrand ? iconUp + '#up' : iconDown + '#down'}
               ></use>
             </svg>
@@ -179,33 +169,36 @@ export const Filter = () => {
         <select
           id="carPrice"
           value={selectedPrice}
-          // defaultValue={selectedPrice}
           className={`${css.filterSelect} ${css.filterSelectPrice}`}
-          // onChange={e => setSelectedPrice(e.target.value)}
-          onChange={e => setSelectedPrice(e.target.value)}
-          // onChange={selectValuePrice}
+          onChange={e => {
+            setSelectedPrice(e.target.value);
+            closeSelectPrice();
+            handleOpenSelectedPrice();
+          }}
           onClick={handleOpenSelectedPrice}
         >
-          <option value="">To $</option> 
+          <option value="">To $</option>
           {carPrice.map(price => (
-            <option key={price} value={price}>
+            <option
+              key={price}
+              value={price}
+              className={`${css.optionSelect} ${css.optionSelectPrice}`}
+            >
               {price}
             </option>
           ))}
         </select>
-        {/* {selectedPrice !== '' && <div className={css.iconDollar}>$</div>} */}
 
-        {isOpenSelectedPrice ? (
+        <div className={css.iconContainer} onClick={clickSelectPrice}>
           <svg width={25} height={25} className={css.iconArrowPrice}>
-            <use href={iconUp + '#up'}></use>
+            <use
+              href={isOpenSelectedPrice ? iconUp + '#up' : iconDown + '#down'}
+            ></use>
           </svg>
-        ) : (
-          <svg width={25} height={25} className={css.iconArrowPrice}>
-            <use href={iconDown + '#down'}></use>
-          </svg>
-        )}
+        </div>
       </div>
 
+      {/* ----------------------------------mileage-------------------------------------------------------------------- */}
       <div className={css.mileageWrap}>
         <label htmlFor="mileageFrom" className={css.label}>
           Car Mileage / km{' '}
@@ -222,7 +215,6 @@ export const Filter = () => {
             id="mileageFrom"
             mask="9,999"
             title="Only number"
-            // className={classNames(css.filterMileage, css.filterMileageFrom)}
             className={`${css.filterMileage} ${css.filterMileageFrom}`}
             value={selectedMileageFrom}
             onChange={handleMileageValueFrom}
@@ -240,7 +232,6 @@ export const Filter = () => {
             mask="9,999"
             className={`${css.filterMileage} ${css.filterMileageTo}`}
             value={selectedMileageTo}
-            // onChange={e => setMileageTo(e.target.value)}
             onChange={handleMileageValueTo}
           />
         </div>

@@ -21,6 +21,26 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+.selectContainer {
+  position: relative;
+  z-index: 100;
+  overflow: visible;
+}
+.iconArrowBrand {
+  position: absolute;
+  left: 195px;
+  top: 12px;
+  background: #f7f7fb;
+}
+
+.iconArrowPrice {
+  position: absolute;
+  left: 98px;
+  top: 37px;
+  background: #f7f7fb;
+  z-index: 20;
+}
 .mileageWrap {
   display: flex;
   flex-direction: column;
@@ -59,6 +79,7 @@
   width: 224px;
   height: 48px;
   padding-left: 18px;
+
   color: #121417;
   font-size: 18px;
   font-weight: 500;
@@ -66,17 +87,39 @@
   border-radius: 14px;
   background: #f7f7fb;
   border: none;
+
+  overflow: visible;
 }
+
 .filterSelect:hover,
 .filterSelect:focus {
   outline-color: var(--blue-color);
+  background: #f7f7fb;
 }
+.optionSelect {
+  width: 185px;
+  height: 22px;
+  padding-left: 18px;
+  background-color: #f7f7fb;
+  overflow: auto;
+  cursor: pointer;
+}
+.optionSelect:hover,
+.optionSelect:focus {
+  background-color: var(--blue-color);
+}
+
 .filterSelectPrice {
- 
   width: 125px;
   height: 48px;
+  overflow: visible;
+
+  z-index: 10;
 }
-.iconDollar{
+.optionSelectPrice {
+  width: 88px;
+}
+.iconDollar {
   position: absolute;
   left: 50px;
   top: 50%;
@@ -85,7 +128,6 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 111.111;
-  
 }
 .filterMileage {
   box-sizing: border-box;
@@ -107,6 +149,12 @@
   border-radius: 14px 0px 0px 14px;
   border-right: 1px solid rgba(138, 138, 137, 0.2);
   padding-left: 75px;
+}
+.filterMileageFrom:hover,
+.filterMileageFrom:focus,
+.filterMileageTo:hover,
+.filterMileageTo:focus {
+  outline-color: var(--blue-color);
 }
 .filterMileageTo {
   border-radius: 0px 14px 14px 0px;
@@ -144,21 +192,7 @@
   border: none;
 }
 
-.iconArrowBrand {
-  position: absolute;
-  left: 195px;
-  top: 37px;
-  background: #f7f7fb;
-}
-
-.iconArrowPrice {
-  position: absolute;
-  left: 100px;
-  top: 37px;
-  background: #f7f7fb;
-}
 .buttonWrap {
   display: flex;
   gap: 20px;
 }
-

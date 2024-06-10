@@ -21,7 +21,11 @@ const HomePage = () => {
               alt="Rental car"
             />
 
-            <p className={`${css.price} ${'animate__animated animate__repeat-3 animate__slower 5s animate__zoomIn'}`}>
+            <p
+              className={`${
+                css.price
+              } ${'animate__animated animate__repeat-3 animate__slower 5s animate__zoomIn'}`}
+            >
               at <br />
               $25/day
             </p>
@@ -32,7 +36,12 @@ const HomePage = () => {
           Our cars are for your needs, <br />
           <span>
             {' '}
-            <NavLink to="/catalog" className={`${css.catalogLink} ${'animate__animated animate__flash animate__slower 5s'}`}>
+            <NavLink
+              to="/catalog"
+              className={`${
+                css.catalogLink
+              } ${'animate__animated animate__flash animate__slower 5s'}`}
+            >
               go to the catalog
             </NavLink>
           </span>{' '}
@@ -49,7 +58,9 @@ const HomePage = () => {
           <img
             className={`${
               css.photo
-            } ${'animate__animated animate__slideInRight animate__repeat-3 animate__slow 5s '} ${css.photoFamily}`}
+            } ${'animate__animated animate__slideInRight animate__repeat-3 animate__slow 5s '} ${
+              css.photoFamily
+            }`}
             src="https://res.cloudinary.com/daqddzmhs/image/upload/v1699269674/Travelling_uxey6w.jpg"
             alt="Rental car"
           />
@@ -71,7 +82,6 @@ const HomePage = () => {
           />
         </div>
 
-
         <div className={css.familyWrap}>
           <p
             className={`${'animate__animated animate__slideInLeft'} ${
@@ -83,12 +93,13 @@ const HomePage = () => {
           <img
             className={`${
               css.photo
-            } ${'animate__animated animate__slideInRight animate__repeat-3 animate__slow	5s '} ${css.photoFamily}`}
+            } ${'animate__animated animate__slideInRight animate__repeat-3 animate__slow	5s '} ${
+              css.photoFamily
+            }`}
             src="https://res.cloudinary.com/daqddzmhs/image/upload/v1699269920/for_business_meetings_ffyx5n.jpg"
             alt="Rental car"
           />
         </div>
-       
       </section>
     </div>
   );

@@ -35,7 +35,9 @@ footer {
   background-color: #f7f7fb;
   text-align: center;
 }
-
+ a {
+  outline-color: var(--blue-color);
+ }
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -76,5 +78,6 @@ footer {
   &:hover,
   &:focus {
     color: var(--blue-color);
+    outline-color: var(--blue-color);
   }
 }
